@@ -1,0 +1,14 @@
+# Use the official PostgreSQL image
+FROM postgres
+
+# Set environment variables for the database
+ENV POSTGRES_DB postgres
+ENV POSTGRES_USER postgres
+ENV POSTGRES_PASSWORD Palvin123
+ENV POSTGRES_HOST=postgres
+ENV POSTGRES_PORT=5432
+
+# Copy the SQL script to create tables
+COPY script.sql /docker-entrypoint-initdb.d/
+# Grant permissions to the custom initialization script
+RUN chmod +x /docker-entrypoint-initdb.d/script.sql

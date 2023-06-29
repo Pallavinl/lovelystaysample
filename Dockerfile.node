@@ -1,0 +1,39 @@
+# Stage 1: Build the Node.js application
+FROM node:14 AS builder
+
+# Set the working directory inside the container
+WORKDIR /lovelystay
+
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
+
+# Install Node.js dependencies
+RUN npm install
+
+# Install TypeScript globally
+RUN npm install -g typescript
+
+# Copy the rest of the application code to the container
+COPY . .
+
+# Build the TypeScript code
+RUN npm run build
+
+# Stage 2: Create the final container
+FROM node:14-alpine
+
+# Set the working directory for the Node.js application
+WORKDIR /lovelystay
+
+# Copy the built Node.js application from the previous stage
+COPY --from=builder /lovelystay /lovelystay
+
+# Set the environment variables
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# Expose the port
+EXPOSE 3000
+
+# Start the Node.js application
+CMD [ "node", "index.js" ]
