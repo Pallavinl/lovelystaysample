@@ -13,7 +13,7 @@ This documentation provides instructions on how to use the Node.js sample projec
 **Installation:**
 1. Clone the repository:
    ```
-   git clone https://github.com/xxxxxxxxxxxxxxxxxxxxxxx/nodejssample.git
+   git clone https://github.com/Pallavinl/lovelystaysample.git
    ```
 
 2. Navigate to the project directory:
